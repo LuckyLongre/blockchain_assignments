@@ -877,3 +877,105 @@ contract OwnerOnlyFunction {
 ### Conclusion:
 
 This contract demonstrates how to implement role-based access control in smart contracts using **modifiers**, ensuring secure execution of sensitive functions by the owner only.
+
+
+---
+
+## Ether Donation Tracker in Solidity (Assignment 8)
+
+### Objective:
+
+To create a Solidity smart contract where:
+
+- Anyone can donate Ether to the contract.
+- The contract tracks and updates the **top 3 donors** based on the total amount donated.
+
+
+### Technologies Used:
+
+- **Solidity** (Smart Contract Language)
+- **Remix IDE** (Online Solidity Compiler & Deployer)
+- **MetaMask** (for sending Ether transactions)
+
+
+### Smart Contract Features:
+
+1. **Donation Function**: Users can send Ether to the contract using a function.
+2. **Tracking Donations**: Maintains a record of each address's total donated amount.
+3. **Top Donors List**: Dynamically updates the top 3 highest contributors.
+4. **Read Functions**: View current top donors and their contribution amounts.
+
+
+### Contract Code:
+```solidity
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+contract TopDonors {
+    mapping(address => uint) public donations;
+
+    address[3] public topDonors;
+    uint[3] public topAmounts;
+
+    // Donate Ether to the contract
+    function donate() public payable {
+        require(msg.value > 0, "Donation must be greater than 0");
+        
+        donations[msg.sender] += msg.value;
+
+        // Check if donor enters the top 3
+        for (uint i = 0; i < 3; i++) {
+            if (donations[msg.sender] > topAmounts[i]) {
+                // Shift lower-ranked donors
+                for (uint j = 2; j > i; j--) {
+                    topDonors[j] = topDonors[j - 1];
+                    topAmounts[j] = topAmounts[j - 1];
+                }
+                // Insert new top donor
+                topDonors[i] = msg.sender;
+                topAmounts[i] = donations[msg.sender];
+                break;
+            }
+        }
+    }
+
+    // View function to get top donors and amounts
+    function getTopDonors() public view returns (address[3] memory, uint[3] memory) {
+        return (topDonors, topAmounts);
+    }
+
+    // Get the contract's balance
+    function getContractBalance() public view returns (uint) {
+        return address(this).balance;
+    }
+}
+```
+
+
+### Steps to Deploy (Using Remix IDE):
+
+1. Open [https://remix.ethereum.org](https://remix.ethereum.org/)
+2. Create a new file named `TopDonors.sol` and paste the above code.
+3. Compile using the **Solidity Compiler** tab.
+4. In the **Deploy & Run Transactions** tab, deploy the contract.
+
+
+### Sample Function Usage:
+
+- `donate()` — Use the VALUE field in Remix to send Ether.
+- `getTopDonors()` — Returns the top 3 donor addresses and their respective amounts.
+- `getContractBalance()` — Shows the total Ether held by the contract.
+
+
+### Expected Output:
+
+- Donation amounts update correctly.
+- Top 3 donor list is dynamically maintained.
+- Anyone can view the leaderboard.
+
+
+### Conclusion:
+
+This contract demonstrates a leaderboard-style implementation using Solidity. It promotes transparent and gamified Ether donation tracking on the Ethereum blockchain.
+
+---
