@@ -588,11 +588,11 @@ These steps build a basic understanding of Ethereum wallets, testnets, and trans
 ---
 
 
-## Voting System in Solidity (Assignment 5)
+# Voting System in Solidity (Assignment 5)
 
 ---
 
-### Objective:
+## Objective:
 
 To create a decentralized voting system using a smart contract on the Ethereum blockchain where:
 
@@ -601,7 +601,7 @@ To create a decentralized voting system using a smart contract on the Ethereum b
 
 ---
 
-### Technologies Used:
+## Technologies Used:
 
 * **Solidity** (Smart Contract Language)
 * **Remix IDE** (Online Solidity Compiler & Deployer)
@@ -609,7 +609,7 @@ To create a decentralized voting system using a smart contract on the Ethereum b
 
 ---
 
-### Smart Contract Features:
+## Smart Contract Features:
 
 1. **Multiple Candidates**
    Candidates are initialized at the time of contract deployment.
@@ -625,7 +625,7 @@ To create a decentralized voting system using a smart contract on the Ethereum b
 
 ---
 
-### Contract Code:
+## Contract Code:
 
 ```solidity
 // SPDX-License-Identifier: MIT
@@ -672,7 +672,7 @@ contract VotingSystem {
 
 ---
 
-### Steps to Deploy (Using Remix IDE):
+## Steps to Deploy (Using Remix IDE):
 
 1. Open [https://remix.ethereum.org](https://remix.ethereum.org).
 2. Create a new file named `VotingSystem.sol` and paste the above code.
@@ -685,7 +685,7 @@ contract VotingSystem {
 
 ---
 
-### Sample Function Usage:
+## Sample Function Usage:
 
 * `vote("Alice")` — Cast your vote to Alice.
 * `getVotes("Alice")` — See total votes for Alice.
@@ -693,7 +693,7 @@ contract VotingSystem {
 
 ---
 
-### Expected Output:
+## Expected Output:
 
 * Only one vote per address is allowed.
 * Invalid candidate names will be rejected.
@@ -701,16 +701,16 @@ contract VotingSystem {
 
 ---
 
-### Conclusion:
+## Conclusion:
 
 This practical demonstrates how blockchain can provide transparency and trust in voting systems. With Solidity, we ensure fair voting by limiting users to a single vote and publicly exposing real-time results.
 
 ---
 
 
-## Student Records in Solidity (Assignment 6)
+# Student Records in Solidity (Assignment 6)
 
-### Objective:
+## Objective:
 
 To create a decentralized student record system using a smart contract on the Ethereum blockchain where:
 
@@ -719,14 +719,14 @@ To create a decentralized student record system using a smart contract on the Et
 - Anyone can retrieve student data by index.
 
 
-### Technologies Used:
+## Technologies Used:
 
 - **Solidity** (Smart Contract Language)
 - **Remix IDE** (Online Solidity Compiler & Deployer)
 - **MetaMask** (for address-based testing - optional)
 
 
-### Smart Contract Features:
+## Smart Contract Features:
 
 1. **Student Structure**: Each student has a `name` and `roll number`.
 2. **Dynamic Storage**: New student records can be added anytime.
@@ -734,7 +734,7 @@ To create a decentralized student record system using a smart contract on the Et
 4. **Event Emission**: Emits an event when a student is added.
 
 
-### Contract Code:
+## Contract Code:
 ```solidity
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
@@ -772,7 +772,7 @@ contract StudentRecords {
 ```
 
 
-### Steps to Deploy (Using Remix IDE):
+## Steps to Deploy (Using Remix IDE):
 
 1. Open [https://remix.ethereum.org](https://remix.ethereum.org/)
 2. Create a new file named `StudentRecords.sol` and paste the above code.
@@ -787,14 +787,14 @@ contract StudentRecords {
 - `getTotalStudents()` — Returns the total number of students added.
 
 
-### Expected Output:
+## Expected Output:
 
 - Users can add unlimited student records.
 - Retrieval of student data by index.
 - Real-time view of total students.
 
 
-### Conclusion:
+## Conclusion:
 
 This smart contract shows how blockchain can help securely store and manage student records in a transparent and decentralized manner. Anyone can view and add data, and all changes are recorded immutably.
 
@@ -804,9 +804,9 @@ The contract and documentation have been updated to follow the structured format
 ---
 
 
-## Owner-Only Access in Solidity (Asssignment 7)
+# Owner-Only Access in Solidity (Asssignment 7)
 
-### Objective:
+## Objective:
 
 To create a Solidity smart contract where:
 
@@ -814,21 +814,21 @@ To create a Solidity smart contract where:
 - Use of Solidity **modifiers** to implement access control.
 
 
-### Technologies Used:
+## Technologies Used:
 
 - **Solidity** (Smart Contract Language)
 - **Remix IDE** (Online Solidity Compiler & Deployer)
 - **MetaMask** (for address-based testing - optional)
 
 
-### Smart Contract Features:
+## Smart Contract Features:
 
 1. **Owner Identification**: Stores the deployer’s address as the contract owner.
 2. **Access Restriction**: Uses a `modifier` to restrict certain function(s) to the owner only.
 3. **Secure Execution**: Unauthorized users cannot execute restricted functions.
 
 
-### Contract Code:
+## Contract Code:
 ```solidity
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
@@ -856,7 +856,7 @@ contract OwnerOnlyFunction {
 ```
 
 
-### Steps to Deploy (Using Remix IDE):
+## Steps to Deploy (Using Remix IDE):
 
 1. Open [https://remix.ethereum.org](https://remix.ethereum.org/)
 2. Create a new file named `OwnerOnlyFunction.sol` and paste the above code.
@@ -864,26 +864,26 @@ contract OwnerOnlyFunction {
 4. Go to the **Deploy & Run Transactions** tab and click **Deploy**.
 
 
-### Sample Function Usage:
+## Sample Function Usage:
 
 - `secretFunction()` — Only callable by the contract owner.
 
 
-### Expected Output:
+## Expected Output:
 
 - If the function is called by anyone other than the deployer (owner), the contract will throw an error: `Access denied: Only owner can call this function.`
 
 
-### Conclusion:
+## Conclusion:
 
 This contract demonstrates how to implement role-based access control in smart contracts using **modifiers**, ensuring secure execution of sensitive functions by the owner only.
 
 
 ---
 
-## Ether Donation Tracker in Solidity (Assignment 8)
+# Ether Donation Tracker in Solidity (Assignment 8)
 
-### Objective:
+## Objective:
 
 To create a Solidity smart contract where:
 
@@ -891,14 +891,14 @@ To create a Solidity smart contract where:
 - The contract tracks and updates the **top 3 donors** based on the total amount donated.
 
 
-### Technologies Used:
+## Technologies Used:
 
 - **Solidity** (Smart Contract Language)
 - **Remix IDE** (Online Solidity Compiler & Deployer)
 - **MetaMask** (for sending Ether transactions)
 
 
-### Smart Contract Features:
+## Smart Contract Features:
 
 1. **Donation Function**: Users can send Ether to the contract using a function.
 2. **Tracking Donations**: Maintains a record of each address's total donated amount.
@@ -906,7 +906,7 @@ To create a Solidity smart contract where:
 4. **Read Functions**: View current top donors and their contribution amounts.
 
 
-### Contract Code:
+## Contract Code:
 ```solidity
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
@@ -952,38 +952,37 @@ contract TopDonors {
 ```
 
 
-### Steps to Deploy (Using Remix IDE):
+## Steps to Deploy (Using Remix IDE):
 
 1. Open [https://remix.ethereum.org](https://remix.ethereum.org/)
 2. Create a new file named `TopDonors.sol` and paste the above code.
 3. Compile using the **Solidity Compiler** tab.
 4. In the **Deploy & Run Transactions** tab, deploy the contract.
 
-
-### Sample Function Usage:
+## Sample Function Usage:
 
 - `donate()` — Use the VALUE field in Remix to send Ether.
 - `getTopDonors()` — Returns the top 3 donor addresses and their respective amounts.
 - `getContractBalance()` — Shows the total Ether held by the contract.
 
 
-### Expected Output:
+## Expected Output:
 
 - Donation amounts update correctly.
 - Top 3 donor list is dynamically maintained.
 - Anyone can view the leaderboard.
 
 
-### Conclusion:
+## Conclusion:
 
 This contract demonstrates a leaderboard-style implementation using Solidity. It promotes transparent and gamified Ether donation tracking on the Ethereum blockchain.
 
 ---
 
 
-## Simple Auction System in Solidity (Assignment 9)
+# Simple Auction System in Solidity (Assignment 9)
 
-### Objective:
+## Objective:
 
 To implement a basic auction contract where:
 
@@ -992,14 +991,14 @@ To implement a basic auction contract where:
 - The auction can be ended by the owner.
 
 
-### Technologies Used:
+## Technologies Used:
 
 - **Solidity** (Smart Contract Language)
 - **Remix IDE** (Online Solidity Compiler & Deployer)
 - **MetaMask** (for interacting with the contract)
 
 
-### Smart Contract Features:
+## Smart Contract Features:
 
 1. **Placing Bids**: Users can place bids with Ether. Bids must be higher than the current highest bid.
 2. **Tracking Top Bidder**: Stores the address and amount of the highest bidder.
@@ -1007,7 +1006,7 @@ To implement a basic auction contract where:
 4. **Refunding Previous Highest Bidder**: Automatically refunds the previous highest bid when outbid.
 
 
-### Contract Code:
+## Contract Code:
 ```solidity
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
@@ -1064,7 +1063,7 @@ contract SimpleAuction {
 ```
 
 
-### Steps to Deploy (Using Remix IDE):
+## Steps to Deploy (Using Remix IDE):
 
 1. Go to [https://remix.ethereum.org](https://remix.ethereum.org/)
 2. Create a new file named `SimpleAuction.sol` and paste the code above.
@@ -1072,29 +1071,29 @@ contract SimpleAuction {
 4. Deploy it using the **Deploy & Run Transactions** tab.
 
 
-### Sample Function Usage:
+## Sample Function Usage:
 
 - `bid()` — Place a bid by entering Ether value in the VALUE field.
 - `withdraw()` — Previous bidders can withdraw their funds.
 - `endAuction()` — Owner ends the auction and receives the highest bid.
 
 
-### Expected Output:
+## Expected Output:
 
 - Only higher bids are accepted.
 - Previous top bidders are refunded.
 - Owner can end the auction and receive funds.
 
 
-### Conclusion:
+## Conclusion:
 
 This basic auction contract enables transparent and competitive bidding. Solidity ensures secure bid handling, automatic refunds, and owner-controlled auction finalization.
 
 ---
 
-## Ether Splitter Contract in Solidity (Assignment 10)
+# Ether Splitter Contract in Solidity (Assignment 10)
 
-### Objective:
+## Objective:
 
 To create a smart contract that:
 
@@ -1102,21 +1101,21 @@ To create a smart contract that:
 - Automatically splits and sends the received Ether equally to 3 **predefined** addresses.
 
 
-### Technologies Used:
+## Technologies Used:
 
 - **Solidity** (Smart Contract Language)
 - **Remix IDE** (Online Solidity Compiler & Deployer)
 - **MetaMask** (for sending Ether transactions)
 
 
-### Smart Contract Features:
+## Smart Contract Features:
 
 1. **Fixed Recipients**: Stores 3 fixed Ethereum addresses to receive Ether.
 2. **Auto Split**: On receiving Ether, it splits the amount into three equal parts and transfers each share.
 3. **Fallback Function**: Handles Ether sent directly to the contract.
 
 
-### Contract Code:
+## Contract Code:
 ```solidity
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
@@ -1146,7 +1145,7 @@ contract EtherSplitter {
 ```
 
 
-### Steps to Deploy (Using Remix IDE):
+## Steps to Deploy (Using Remix IDE):
 
 1. Open [https://remix.ethereum.org](https://remix.ethereum.org/)
 2. Create a new file `EtherSplitter.sol` and paste the above code.
@@ -1155,19 +1154,19 @@ contract EtherSplitter {
 5. Deploy the contract.
 
 
-### Sample Usage:
+## Sample Usage:
 
 - Send Ether to the contract address using the **VALUE** field.
 - Ether will be split equally and automatically sent to all 3 addresses.
 
 
-### Expected Output:
+## Expected Output:
 
 - Ether is split in real-time among the three recipients.
 - If `msg.value` isn't divisible by 3, the remaining wei is sent to the last address.
 
 
-### Conclusion:
+## Conclusion:
 
 This contract automates the distribution of funds among multiple parties, making it useful for revenue sharing, group payments, or pooled investments on Ethereum.
 
