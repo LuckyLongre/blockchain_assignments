@@ -802,3 +802,78 @@ This smart contract shows how blockchain can help securely store and manage stud
 The contract and documentation have been updated to follow the structured format similar to your voting system example. You're ready to push this to GitHub. Let me know if you want help with Git commands or creating a GitHub repo.
 
 ---
+
+
+## Owner-Only Access in Solidity (Asssignment 7)
+
+### Objective:
+
+To create a Solidity smart contract where:
+
+- Only the deployer (owner) of the contract is allowed to call a specific function.
+- Use of Solidity **modifiers** to implement access control.
+
+
+### Technologies Used:
+
+- **Solidity** (Smart Contract Language)
+- **Remix IDE** (Online Solidity Compiler & Deployer)
+- **MetaMask** (for address-based testing - optional)
+
+
+### Smart Contract Features:
+
+1. **Owner Identification**: Stores the deployer’s address as the contract owner.
+2. **Access Restriction**: Uses a `modifier` to restrict certain function(s) to the owner only.
+3. **Secure Execution**: Unauthorized users cannot execute restricted functions.
+
+
+### Contract Code:
+```solidity
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+contract OwnerOnlyFunction {
+
+    address public owner;
+
+    // Set the deployer as the owner
+    constructor() {
+        owner = msg.sender;
+    }
+
+    // Modifier to restrict access to only the owner
+    modifier onlyOwner() {
+        require(msg.sender == owner, "Access denied: Only owner can call this function.");
+        _;
+    }
+
+    // Function only the owner can call
+    function secretFunction() public onlyOwner {
+        // logic only owner can execute
+    }
+}
+```
+
+
+### Steps to Deploy (Using Remix IDE):
+
+1. Open [https://remix.ethereum.org](https://remix.ethereum.org/)
+2. Create a new file named `OwnerOnlyFunction.sol` and paste the above code.
+3. Compile the code using the **Solidity Compiler** tab.
+4. Go to the **Deploy & Run Transactions** tab and click **Deploy**.
+
+
+### Sample Function Usage:
+
+- `secretFunction()` — Only callable by the contract owner.
+
+
+### Expected Output:
+
+- If the function is called by anyone other than the deployer (owner), the contract will throw an error: `Access denied: Only owner can call this function.`
+
+
+### Conclusion:
+
+This contract demonstrates how to implement role-based access control in smart contracts using **modifiers**, ensuring secure execution of sensitive functions by the owner only.
