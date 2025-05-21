@@ -586,3 +586,122 @@ These steps build a basic understanding of Ethereum wallets, testnets, and trans
 > **Learning Outcome:** Practical experience with wallets, test ETH, and network setup prepares users for blockchain development and testing.
 
 ---
+
+
+## Voting System in Solidity
+
+---
+
+### Objective:
+
+To create a decentralized voting system using a smart contract on the Ethereum blockchain where:
+
+* Multiple candidates can be voted for.
+* Each Ethereum address is allowed to vote **only once**.
+
+---
+
+### Technologies Used:
+
+* **Solidity** (Smart Contract Language)
+* **Remix IDE** (Online Solidity Compiler & Deployer)
+* **MetaMask** (for address-based testing - optional)
+
+---
+
+### Smart Contract Features:
+
+1. **Multiple Candidates**
+   Candidates are initialized at the time of contract deployment.
+
+2. **One Vote per Address**
+   A voter can vote only once. The contract keeps track of voters using their address.
+
+3. **Vote Counting**
+   The system counts the number of votes received by each candidate.
+
+4. **Public Access**
+   Anyone can read the number of votes each candidate has received.
+
+---
+
+### Contract Code:
+
+```solidity
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+contract VotingSystem {
+    address public owner;
+    string[] public candidateList;
+    mapping(string => uint256) public votesReceived;
+    mapping(address => bool) public hasVoted;
+
+    constructor(string[] memory candidateNames) {
+        owner = msg.sender;
+        candidateList = candidateNames;
+    }
+
+    function vote(string memory candidate) public {
+        require(!hasVoted[msg.sender], "You have already voted!");
+        require(validCandidate(candidate), "Candidate does not exist!");
+
+        votesReceived[candidate] += 1;
+        hasVoted[msg.sender] = true;
+    }
+
+    function getVotes(string memory candidate) public view returns (uint256) {
+        require(validCandidate(candidate), "Candidate does not exist!");
+        return votesReceived[candidate];
+    }
+
+    function validCandidate(string memory candidate) internal view returns (bool) {
+        for (uint i = 0; i < candidateList.length; i++) {
+            if (keccak256(bytes(candidateList[i])) == keccak256(bytes(candidate))) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    function totalCandidates() public view returns (uint256) {
+        return candidateList.length;
+    }
+}
+```
+
+---
+
+### Steps to Deploy (Using Remix IDE):
+
+1. Open [https://remix.ethereum.org](https://remix.ethereum.org).
+2. Create a new file named `VotingSystem.sol` and paste the above code.
+3. Compile the code using the **Solidity Compiler** tab.
+4. Go to the **Deploy & Run** tab:
+
+   * In the constructor input, pass candidate names like:
+     `["Alice", "Bob", "Charlie"]`
+   * Click **Deploy**.
+
+---
+
+### Sample Function Usage:
+
+* `vote("Alice")` — Cast your vote to Alice.
+* `getVotes("Alice")` — See total votes for Alice.
+* `totalCandidates()` — Get the number of candidates.
+
+---
+
+### Expected Output:
+
+* Only one vote per address is allowed.
+* Invalid candidate names will be rejected.
+* Vote counts will update in real-time.
+
+---
+
+### Conclusion:
+
+This practical demonstrates how blockchain can provide transparency and trust in voting systems. With Solidity, we ensure fair voting by limiting users to a single vote and publicly exposing real-time results.
+
