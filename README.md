@@ -588,7 +588,7 @@ These steps build a basic understanding of Ethereum wallets, testnets, and trans
 ---
 
 
-## Voting System in Solidity
+## Voting System in Solidity (Assignment 5)
 
 ---
 
@@ -705,3 +705,100 @@ contract VotingSystem {
 
 This practical demonstrates how blockchain can provide transparency and trust in voting systems. With Solidity, we ensure fair voting by limiting users to a single vote and publicly exposing real-time results.
 
+---
+
+
+## Student Records in Solidity (Assignment 6)
+
+### Objective:
+
+To create a decentralized student record system using a smart contract on the Ethereum blockchain where:
+
+- Multiple student records (name and roll number) can be stored.
+- Users can add new student records.
+- Anyone can retrieve student data by index.
+
+
+### Technologies Used:
+
+- **Solidity** (Smart Contract Language)
+- **Remix IDE** (Online Solidity Compiler & Deployer)
+- **MetaMask** (for address-based testing - optional)
+
+
+### Smart Contract Features:
+
+1. **Student Structure**: Each student has a `name` and `roll number`.
+2. **Dynamic Storage**: New student records can be added anytime.
+3. **Public Access**: Anyone can retrieve a student record or check the total number of students.
+4. **Event Emission**: Emits an event when a student is added.
+
+
+### Contract Code:
+```solidity
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+contract StudentRecords {
+
+    struct Student {
+        string name;
+        uint rollNumber;
+    }
+
+    Student[] public students;
+
+    // Event for logging added students
+    event StudentAdded(string name, uint rollNumber);
+
+    // Function to add a new student
+    function addStudent(string memory _name, uint _rollNumber) public {
+        students.push(Student(_name, _rollNumber));
+        emit StudentAdded(_name, _rollNumber);
+    }
+
+    // Function to get a student by index
+    function getStudent(uint index) public view returns (string memory, uint) {
+        require(index < students.length, "Invalid index");
+        Student memory s = students[index];
+        return (s.name, s.rollNumber);
+    }
+
+    // Function to get the total number of students
+    function getTotalStudents() public view returns (uint) {
+        return students.length;
+    }
+}
+```
+
+
+### Steps to Deploy (Using Remix IDE):
+
+1. Open [https://remix.ethereum.org](https://remix.ethereum.org/)
+2. Create a new file named `StudentRecords.sol` and paste the above code.
+3. Compile the code using the **Solidity Compiler** tab.
+4. Go to the **Deploy & Run Transactions** tab and click **Deploy**.
+
+
+### Sample Function Usage:
+
+- `addStudent("Lucky", 101)` — Adds a student named Lucky with roll number 101.
+- `getStudent(0)` — Retrieves the first student’s data.
+- `getTotalStudents()` — Returns the total number of students added.
+
+
+### Expected Output:
+
+- Users can add unlimited student records.
+- Retrieval of student data by index.
+- Real-time view of total students.
+
+
+### Conclusion:
+
+This smart contract shows how blockchain can help securely store and manage student records in a transparent and decentralized manner. Anyone can view and add data, and all changes are recorded immutably.
+
+
+The contract and documentation have been updated to follow the structured format similar to your voting system example. You're ready to push this to GitHub. Let me know if you want help with Git commands or creating a GitHub repo.
+
+---
