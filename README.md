@@ -1091,3 +1091,84 @@ contract SimpleAuction {
 This basic auction contract enables transparent and competitive bidding. Solidity ensures secure bid handling, automatic refunds, and owner-controlled auction finalization.
 
 ---
+
+## Ether Splitter Contract in Solidity (Assignment 10)
+
+### Objective:
+
+To create a smart contract that:
+
+- Accepts Ether from any sender.
+- Automatically splits and sends the received Ether equally to 3 **predefined** addresses.
+
+
+### Technologies Used:
+
+- **Solidity** (Smart Contract Language)
+- **Remix IDE** (Online Solidity Compiler & Deployer)
+- **MetaMask** (for sending Ether transactions)
+
+
+### Smart Contract Features:
+
+1. **Fixed Recipients**: Stores 3 fixed Ethereum addresses to receive Ether.
+2. **Auto Split**: On receiving Ether, it splits the amount into three equal parts and transfers each share.
+3. **Fallback Function**: Handles Ether sent directly to the contract.
+
+
+### Contract Code:
+```solidity
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+contract EtherSplitter {
+    address payable public recipient1;
+    address payable public recipient2;
+    address payable public recipient3;
+
+    constructor(address payable _r1, address payable _r2, address payable _r3) {
+        recipient1 = _r1;
+        recipient2 = _r2;
+        recipient3 = _r3;
+    }
+
+    // Function to receive Ether and split it
+    receive() external payable {
+        require(msg.value > 0, "Send some Ether");
+
+        uint share = msg.value / 3;
+
+        recipient1.transfer(share);
+        recipient2.transfer(share);
+        recipient3.transfer(msg.value - 2 * share); // send remaining to 3rd
+    }
+}
+```
+
+
+### Steps to Deploy (Using Remix IDE):
+
+1. Open [https://remix.ethereum.org](https://remix.ethereum.org/)
+2. Create a new file `EtherSplitter.sol` and paste the above code.
+3. Compile the contract using **Solidity Compiler**.
+4. In the **Deploy & Run** tab, enter 3 valid Ethereum addresses in the constructor input.
+5. Deploy the contract.
+
+
+### Sample Usage:
+
+- Send Ether to the contract address using the **VALUE** field.
+- Ether will be split equally and automatically sent to all 3 addresses.
+
+
+### Expected Output:
+
+- Ether is split in real-time among the three recipients.
+- If `msg.value` isn't divisible by 3, the remaining wei is sent to the last address.
+
+
+### Conclusion:
+
+This contract automates the distribution of funds among multiple parties, making it useful for revenue sharing, group payments, or pooled investments on Ethereum.
+
+---
