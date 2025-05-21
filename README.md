@@ -979,3 +979,115 @@ contract TopDonors {
 This contract demonstrates a leaderboard-style implementation using Solidity. It promotes transparent and gamified Ether donation tracking on the Ethereum blockchain.
 
 ---
+
+
+## Simple Auction System in Solidity (Assignment 9)
+
+### Objective:
+
+To implement a basic auction contract where:
+
+- Users can place bids by sending Ether.
+- The contract keeps track of the highest bid and bidder.
+- The auction can be ended by the owner.
+
+
+### Technologies Used:
+
+- **Solidity** (Smart Contract Language)
+- **Remix IDE** (Online Solidity Compiler & Deployer)
+- **MetaMask** (for interacting with the contract)
+
+
+### Smart Contract Features:
+
+1. **Placing Bids**: Users can place bids with Ether. Bids must be higher than the current highest bid.
+2. **Tracking Top Bidder**: Stores the address and amount of the highest bidder.
+3. **End Auction**: Only the owner can end the auction and transfer funds.
+4. **Refunding Previous Highest Bidder**: Automatically refunds the previous highest bid when outbid.
+
+
+### Contract Code:
+```solidity
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+contract SimpleAuction {
+    address public owner;
+    address public highestBidder;
+    uint public highestBid;
+    bool public auctionEnded;
+
+    mapping(address => uint) public pendingReturns;
+
+    constructor() {
+        owner = msg.sender;
+    }
+
+    // Place a bid
+    function bid() public payable {
+        require(!auctionEnded, "Auction already ended.");
+        require(msg.value > highestBid, "There already is a higher bid.");
+
+        if (highestBid != 0) {
+            // Refund the previous highest bidder
+            pendingReturns[highestBidder] += highestBid;
+        }
+
+        highestBidder = msg.sender;
+        highestBid = msg.value;
+    }
+
+    // Withdraw overbid amounts
+    function withdraw() public returns (bool) {
+        uint amount = pendingReturns[msg.sender];
+        require(amount > 0, "No funds to withdraw.");
+
+        pendingReturns[msg.sender] = 0;
+
+        if (!payable(msg.sender).send(amount)) {
+            pendingReturns[msg.sender] = amount;
+            return false;
+        }
+        return true;
+    }
+
+    // End the auction
+    function endAuction() public {
+        require(msg.sender == owner, "Only owner can end the auction.");
+        require(!auctionEnded, "Auction already ended.");
+
+        auctionEnded = true;
+        payable(owner).transfer(highestBid);
+    }
+}
+```
+
+
+### Steps to Deploy (Using Remix IDE):
+
+1. Go to [https://remix.ethereum.org](https://remix.ethereum.org/)
+2. Create a new file named `SimpleAuction.sol` and paste the code above.
+3. Compile it using **Solidity Compiler**.
+4. Deploy it using the **Deploy & Run Transactions** tab.
+
+
+### Sample Function Usage:
+
+- `bid()` — Place a bid by entering Ether value in the VALUE field.
+- `withdraw()` — Previous bidders can withdraw their funds.
+- `endAuction()` — Owner ends the auction and receives the highest bid.
+
+
+### Expected Output:
+
+- Only higher bids are accepted.
+- Previous top bidders are refunded.
+- Owner can end the auction and receive funds.
+
+
+### Conclusion:
+
+This basic auction contract enables transparent and competitive bidding. Solidity ensures secure bid handling, automatic refunds, and owner-controlled auction finalization.
+
+---
